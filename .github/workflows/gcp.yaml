@@ -30,8 +30,8 @@ jobs:
 
     - name: Push Docker Image to Container Registry(GCR)
       env: 
-        GIT_TAG: v0.0.1
-      run: 
+        GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
+      run: |-
         docker tag $IMAGE-NAME:latest northamerica-northeast1-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
         docker tag $IMAGE-NAME:latest northamerica-northeast1-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:$GIT_TAG
         docker push northamerica-northeast1-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
