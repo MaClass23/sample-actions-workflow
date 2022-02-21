@@ -29,6 +29,11 @@ jobs:
         gcloud auth configure-docker northamerica-northeast1-docker.pkg.dev --quiet
         
     - name: Push Docker Image to Container Registry(GCR)
+      uses: google-github-actions/setup-gcloud@master
+      with:
+        service_account_key: ${{ secrets. SERVICE_ACCOUNT_KEY }}
+        project_id: ${{ env.PROJECT_ID }}
+        export_default_credentials: true 
       env: 
         GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
         run: |-
@@ -38,6 +43,11 @@ jobs:
           docker push northamerica-northeast1-mamz/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
           
     - name: Push Docker Image to Container Registry(GCR)
+      uses: google-github-actions/setup-gcloud@master
+      with:
+        service_account_key: ${{ secrets. SERVICE_ACCOUNT_KEY }}
+        project_id: ${{ env.PROJECT_ID }}
+        export_default_credentials: true 
       env: 
         GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
         run: 
